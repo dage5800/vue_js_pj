@@ -1,7 +1,8 @@
 <script setup>
-import { ref, onMounted } from 'vue'
+import { ref, onMounted, watch } from 'vue'
 
 const p = ref(null)
+const count = ref(0)
 
 onMounted(() => {
   p.value.textContent = 'hello!'
@@ -12,10 +13,18 @@ defineProps({
     required: true
   }
 })
+
+watch(count, (newCount) => {
+  console.log(`new count is: ${newCount}`)
+})
 </script>
 
 <template>
-  <p ref="p">f**k you</p>
+  <table>
+    <p ref="p">f**k you</p>
+    <div>count: {{ count }}</div>
+    <button @click="count++">count+</button>
+</table>
   <div class="greetings">
     <h1 class="green">{{ msg }}</h1>
     <h3>
